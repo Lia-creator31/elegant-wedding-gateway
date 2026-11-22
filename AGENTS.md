@@ -30,7 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
-- The cover (`Cover.tsx`) is a palace wall papered with a tiled damask Lovable Asset, with the names on a framed plaque and a wide two-leaf door split from one generated image so both leaves match; leaves swing inward inside an overflow-hidden opening.
+- The cover (`Cover.tsx`) is a nature-themed garden wall (one full-bleed Lovable Asset per orientation) whose palette matches the transition film, with the names on a frosted card and the user's arched two-leaf door split from their own image; the doorway and stone surround reuse the door's alpha silhouette as a mask, and the door's foot is positioned from the wall image's pavement line so it stands on the ground at every screen size.
 - The invitation flow lives in `src/components/invite/` (Cover → Journey → Main), orchestrated by `src/routes/index.tsx`; Journey is a single full-bleed transition film (Lovable Assets video) mounted under the Cover from page load so it buffers early, starts playing on tap, and hands off to Main when it ends — no blank frames.
 - Opening-scene characters, garden animals and butterflies are positioned in percentages of a fixed-aspect "stage" that matches the garden image, so they stay aligned with its perspective on every screen size.
 - Binary images are served via Lovable Assets pointers (`*.asset.json`), optimized to WebP where possible, to keep phone loading light.

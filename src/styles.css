@@ -71,6 +71,9 @@
   --color-royal-sage: var(--royal-sage);
   --color-royal-sage-deep: var(--royal-sage-deep);
   --color-royal-sage-soft: var(--royal-sage-soft);
+  --color-garden-leaf: var(--garden-leaf);
+  --color-garden-leaf-deep: var(--garden-leaf-deep);
+  --color-garden-stone: var(--garden-stone);
 
   --font-display: "Cormorant Garamond", serif;
   --font-script: "Great Vibes", cursive;
@@ -108,6 +111,9 @@
   --royal-sage: oklch(0.43 0.06 238);
   --royal-sage-deep: oklch(0.34 0.05 242);
   --royal-sage-soft: oklch(0.52 0.06 234);
+  --garden-leaf: oklch(0.4 0.07 148);
+  --garden-leaf-deep: oklch(0.3 0.055 150);
+  --garden-stone: oklch(0.9 0.03 85);
   --gradient-royal-garden: radial-gradient(ellipse at 50% 26%, var(--royal-sage-soft), var(--royal-sage) 46%, var(--royal-sage-deep));
   --shadow-ornament: drop-shadow(0 1px 1.2px oklch(0.12 0.04 260 / 0.6));
   --gradient-royal-gold: linear-gradient(180deg, oklch(0.9 0.11 92), var(--royal-gold) 50%, oklch(0.631 0.119 87.4));
@@ -462,94 +468,65 @@
   background: radial-gradient(ellipse at 50% 45%, color-mix(in oklab, var(--royal-gold-light) 14%, transparent), transparent 42%, oklch(0.12 0.05 262 / 0.7) 100%);
 }
 
-/* ── Cover: a damask-papered palace wall framing a wide, realistic double door ── */
-@utility wall-damask {
-  background-color: var(--royal-navy);
-  background-repeat: repeat;
-  background-position: center top;
-  background-size: 240px 240px;
-  @media (min-width: 768px) { background-size: 320px 320px; }
+/* ── Cover: a sunlit garden wall with ivy and roses framing the carved arched door ── */
+.nature-wall {
+  background-color: var(--garden-stone);
+  background-image: var(--wall-portrait);
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  /* how far the pavement sits above the screen's bottom edge, so the door stands on it */
+  --door-foot: calc(max(100dvh, 150vw) * 0.1);
+  --door-h: 52dvh;
 }
-/* soft room lighting over the wallpaper: darker corners, a lit pool around the door, readable top */
-.wall-shade {
+@media (min-aspect-ratio: 1/1) {
+  .nature-wall {
+    background-image: var(--wall-landscape);
+    --door-foot: calc(max(100dvh, 66.667vw) * 0.135);
+    --door-h: 52dvh;
+  }
+}
+/* morning sun from the upper left, a soft veil behind the names and a gentle warm vignette */
+.nature-wall-light {
   background:
-    radial-gradient(ellipse 70% 55% at 50% 68%, color-mix(in oklab, var(--royal-gold-light) 16%, transparent), transparent 70%),
-    linear-gradient(180deg, oklch(0.14 0.04 262 / 0.72) 0%, oklch(0.16 0.04 262 / 0.35) 32%, oklch(0.14 0.04 262 / 0.25) 60%, oklch(0.1 0.03 262 / 0.6) 100%),
-    radial-gradient(ellipse at 50% 50%, transparent 55%, oklch(0.08 0.03 262 / 0.75) 100%);
+    radial-gradient(ellipse 60% 45% at 8% 0%, oklch(0.99 0.06 95 / 0.55), transparent 70%),
+    radial-gradient(ellipse 55% 26% at 50% 16%, color-mix(in oklab, var(--ivory) 55%, transparent), transparent 75%),
+    radial-gradient(ellipse at 50% 55%, transparent 60%, oklch(0.35 0.05 80 / 0.28) 100%);
 }
-/* gilded crown moulding along the ceiling */
-.wall-crown {
-  background: linear-gradient(180deg, oklch(0.2 0.04 262), oklch(0.26 0.05 260));
-  border-bottom: 3px solid var(--royal-gold);
-  box-shadow: 0 1px 0 var(--royal-gold-deep), 0 6px 14px oklch(0.08 0.03 262 / 0.6);
+/* the door's size, derived from the screen height and capped for narrow and wide screens */
+.arch-door {
+  bottom: var(--door-foot);
+  width: min(70vw, calc(var(--door-h) * 0.6667), 400px);
+  aspect-ratio: 2 / 3;
 }
-/* lower wood wainscoting with a gold chair rail */
-.wall-wainscot {
+/* soft contact shadow where the door meets the pavement */
+.arch-door-ground {
+  background: radial-gradient(ellipse at 50% 50%, oklch(0.25 0.04 60 / 0.5), transparent 70%);
+}
+/* carved cream-stone surround around the arched door */
+.arch-surround {
   background:
-    repeating-linear-gradient(90deg, transparent 0 calc(25% - 2px), color-mix(in oklab, var(--royal-gold) 35%, transparent) calc(25% - 2px) 25%),
-    linear-gradient(180deg, oklch(0.27 0.05 30), oklch(0.2 0.045 28));
-  border-top: 4px solid var(--royal-gold);
-  box-shadow: 0 -1px 0 var(--royal-gold-light), 0 -8px 18px oklch(0.08 0.03 262 / 0.45);
+    linear-gradient(90deg, oklch(0.8 0.03 80), oklch(0.93 0.025 85) 20%, oklch(0.88 0.03 82) 50%, oklch(0.93 0.025 85) 80%, oklch(0.78 0.03 78));
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  filter: drop-shadow(0 14px 18px oklch(0.3 0.04 60 / 0.45));
 }
-/* polished marble floor */
-.wall-floor {
-  background:
-    linear-gradient(180deg, oklch(0.62 0.02 80), oklch(0.42 0.02 70) 60%, oklch(0.25 0.02 60)),
-    var(--royal-navy);
-  box-shadow: inset 0 3px 6px oklch(0.1 0.03 262 / 0.55);
+/* the garden glimpsed through the doorway takes the door's arched outline */
+.arch-opening {
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  background: oklch(0.85 0.06 120);
 }
-/* framed plaque that carries the couple's names on the wall */
-.wall-plaque {
-  background: linear-gradient(180deg, oklch(0.18 0.045 262 / 0.82), oklch(0.22 0.05 260 / 0.78));
-  border: 1px solid var(--royal-gold);
-  outline: 1px solid color-mix(in oklab, var(--royal-gold) 55%, transparent);
-  outline-offset: 5px;
-  box-shadow: 0 18px 40px -12px oklch(0.06 0.03 262 / 0.8), inset 0 0 30px oklch(0.1 0.03 262 / 0.6);
-  backdrop-filter: blur(2px);
+.arch-light {
+  background: radial-gradient(ellipse at 50% 55%, oklch(0.99 0.06 95 / 0.95), oklch(0.95 0.08 90 / 0.4) 45%, transparent 78%);
 }
-/* glowing wall sconces beside the door */
-.wall-sconce {
-  border-radius: 9999px;
-  background: radial-gradient(circle, oklch(0.95 0.08 88 / 0.95) 0%, oklch(0.85 0.12 80 / 0.55) 22%, oklch(0.79 0.095 80 / 0.15) 50%, transparent 72%);
+.arch-leaf { filter: drop-shadow(0 6px 10px oklch(0.2 0.04 30 / 0.45)); }
+/* frosted ivory card that carries the names over the stone */
+.garden-plaque {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--ivory) 72%, transparent), color-mix(in oklab, var(--ivory) 52%, transparent));
+  border: 1px solid color-mix(in oklab, var(--royal-gold) 70%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--ivory) 35%, transparent), 0 18px 40px -16px oklch(0.35 0.05 80 / 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
-.wall-sconce-cup {
-  background: var(--gradient-royal-gold);
-  clip-path: polygon(0 0, 100% 0, 78% 100%, 22% 100%);
-}
-/* carved gilded door casing */
-.door-casing {
-  background:
-    linear-gradient(90deg, var(--royal-gold-deep), var(--royal-gold-light) 18%, var(--royal-gold) 40%, var(--royal-gold-deep) 50%, var(--royal-gold) 60%, var(--royal-gold-light) 82%, var(--royal-gold-deep));
-  box-shadow:
-    0 0 0 3px oklch(0.2 0.04 262),
-    0 0 0 5px var(--royal-gold-deep),
-    0 30px 50px -10px oklch(0.06 0.03 262 / 0.85),
-    0 0 60px color-mix(in oklab, var(--royal-gold) 22%, transparent);
-}
-.door-opening {
-  background: oklch(0.12 0.03 262);
-  box-shadow: inset 0 0 0 2px oklch(0.25 0.05 60), inset 0 10px 24px oklch(0.06 0.03 262 / 0.9);
-}
-/* cornice / entablature crowning the door */
-.door-cornice {
-  background: linear-gradient(180deg, var(--royal-gold-light), var(--royal-gold) 45%, var(--royal-gold-deep));
-  box-shadow: 0 6px 12px oklch(0.06 0.03 262 / 0.7), inset 0 -2px 0 oklch(0.45 0.08 70);
-}
-.door-pediment {
-  background: linear-gradient(180deg, var(--royal-gold-light), var(--royal-gold) 55%, var(--royal-gold-deep));
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  filter: drop-shadow(0 4px 6px oklch(0.06 0.03 262 / 0.6));
-}
-/* marble threshold step */
-.door-step {
-  background: linear-gradient(180deg, oklch(0.9 0.015 85), oklch(0.72 0.02 80) 55%, oklch(0.55 0.02 70));
-  box-shadow: 0 8px 16px oklch(0.06 0.03 262 / 0.7);
-}
-.door-light {
-  background: radial-gradient(ellipse at 50% 45%, oklch(0.95 0.08 88 / 0.95), oklch(0.85 0.1 82 / 0.45) 40%, transparent 75%);
-}
-.door-leaf-shadow { filter: drop-shadow(0 0 6px oklch(0.06 0.03 262 / 0.7)); }
-.door-pediment-inner {
-  background: linear-gradient(180deg, var(--royal-navy-soft), oklch(0.2 0.045 262));
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
+.cover-hint { text-shadow: 0 1px 6px oklch(0.2 0.05 140 / 0.85); }
