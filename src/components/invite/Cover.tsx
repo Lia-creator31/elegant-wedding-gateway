@@ -3,8 +3,8 @@ import { animate, motion, useMotionTemplate, useMotionValue, useReducedMotion, u
 import doorL from "@/assets/arch-door-left.webp.asset.json";
 import doorR from "@/assets/arch-door-right.webp.asset.json";
 import doorMask from "@/assets/arch-door-mask.webp.asset.json";
-import wallPortrait from "@/assets/nature-wall-portrait.webp.asset.json";
-import wallLandscape from "@/assets/nature-wall-landscape.webp.asset.json";
+import wallPortrait from "@/assets/nature-wall-rb-portrait.webp.asset.json";
+import wallLandscape from "@/assets/nature-wall-rb-landscape.webp.asset.json";
 import openBtn from "@/assets/open-btn.png.asset.json";
 import gardenView from "@/assets/garden-transition-poster.webp.asset.json";
 import { PetalRain } from "./LiveOrnaments";

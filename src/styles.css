@@ -476,13 +476,13 @@
   background-position: center bottom;
   background-repeat: no-repeat;
   /* how far the pavement sits above the screen's bottom edge, so the door stands on it */
-  --door-foot: calc(max(100dvh, 150vw) * 0.1);
+  --door-foot: calc(max(100dvh, 150vw) * 0.12);
   --door-h: 52dvh;
 }
 @media (min-aspect-ratio: 1/1) {
   .nature-wall {
     background-image: var(--wall-landscape);
-    --door-foot: calc(max(100dvh, 66.667vw) * 0.135);
+    --door-foot: calc(max(100dvh, 66.667vw) * 0.1);
     --door-h: 52dvh;
   }
 }
