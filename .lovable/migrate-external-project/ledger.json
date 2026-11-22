@@ -1,0 +1,7 @@
+[
+  {"capability":"code","source":"github Lia-creator31/elegant-wedding-wishes","outcome":"migrate","status":"verified","next_action":"none"},
+  {"capability":"media assets","source":"Lovable Assets of source project","outcome":"re-uploaded","status":"verified","next_action":"none"},
+  {"capability":"wishes schema + sample rows","source":"drizzle migration","outcome":"migrate","status":"verified","next_action":"none"},
+  {"capability":"real guest wishes","source":"old Lovable Cloud database","outcome":"migrate","status":"pending","next_action":"user may export wishes table as CSV if real guest wishes exist"},
+  {"capability":"auth","source":"none","outcome":"not used","status":"verified","next_action":"none"}
+]
