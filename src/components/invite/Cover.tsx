@@ -74,7 +74,6 @@ export function Cover({ guest, onOpenStart, onOpened }: { guest: string; onOpenS
               <h1 className="font-script text-[clamp(2.1rem,min(10vw,7dvh),3.4rem)] leading-tight text-garden-leaf-deep">
                 {WEDDING.bride} & {WEDDING.groom}
               </h1>
-              <p className="font-display text-base italic text-gold-deep sm:text-lg">18 & 20 Desember 2026</p>
               <div className="mt-[clamp(6px,1.2dvh,12px)] h-px w-24 bg-gold-grad opacity-70" />
               <p className="mt-[clamp(6px,1.2dvh,12px)] text-[10px] uppercase tracking-[0.35em] text-garden-leaf">Kepada Yth.</p>
               <p className="max-w-full truncate font-display text-xl font-semibold text-garden-leaf-deep">{guest}</p>

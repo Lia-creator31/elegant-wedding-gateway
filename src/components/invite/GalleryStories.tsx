@@ -139,7 +139,7 @@ function StoryViewer({ index, onClose, onGo, onPick }: { index: number; onClose:
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={p.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.45, ease: EASE }}>
               <p className="font-caps text-[10px] uppercase tracking-[0.32em] text-royal-gold-light/80">
-                Kisah {index + 1} dari {N} · {p.date}
+                Kisah {index + 1} dari {N}
               </p>
               <h3 className="mt-2 font-script text-[2.4rem] leading-tight text-royal-gold md:text-5xl">{p.title}</h3>
               <FiligreeDivider className="glint mx-auto mt-1 opacity-90" style={{ height: 20, width: 170 }} />

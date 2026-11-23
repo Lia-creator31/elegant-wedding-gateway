@@ -63,7 +63,6 @@ function Opening({ guest }: PageCtx) {
       <Up><span className="font-display text-2xl italic text-burgundy">&</span></Up>
       <Up><p className="font-script text-[3.1rem] leading-[1.05] text-gold-ink">{WEDDING.groom}</p></Up>
       <Up><Divider className="mt-3" /></Up>
-      <Up><p className="mt-2 font-display text-lg italic text-ink">18 & 20 Desember 2026</p></Up>
       <Up>
         <p className="mt-5 text-[10px] uppercase tracking-[0.32em] text-ink/60">Kepada Yth.</p>
         <p className="mt-1 max-w-[16rem] truncate font-display text-xl font-semibold text-navy">{guest}</p>
@@ -151,7 +150,7 @@ function SaveDate() {
   );
 }
 
-function EventCard({ icon, title, e, tone }: { icon: string; title: string; e: typeof WEDDING.akad; tone: "navy" | "wine" }) {
+function EventCard({ icon, title, e, tone, hideLocation = false }: { icon: string; title: string; e: typeof WEDDING.akad; tone: "navy" | "wine"; hideLocation?: boolean }) {
   return (
     <motion.div variants={fadeUp} className="overflow-hidden rounded-xl border border-gold-deep/35 bg-ivory/70 text-left shadow-sheet">
       <div className={`flex items-center gap-3 px-4 py-2.5 ${tone === "navy" ? "bg-navy" : "bg-wine-grad"}`}>
@@ -159,13 +158,16 @@ function EventCard({ icon, title, e, tone }: { icon: string; title: string; e: t
         <h3 className="font-display text-xl text-ivory">{title}</h3>
       </div>
       <div className="px-4 py-3">
-        <p className="font-semibold text-navy">{e.label}</p>
         <p className="text-sm font-medium text-burgundy">{e.time}</p>
-        <p className="mt-1.5 font-display text-base font-semibold text-ink">{e.place}</p>
-        <p className="text-xs text-ink/70">{e.address}</p>
-        <motion.a whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }} href={e.map} target="_blank" rel="noreferrer" className="btn-wine mt-3 px-4 py-1.5 text-xs font-medium">
-          <MapPin className="h-3.5 w-3.5" /> Lihat Lokasi
-        </motion.a>
+        {!hideLocation && (
+          <>
+            <p className="mt-1.5 font-display text-base font-semibold text-ink">{e.place}</p>
+            <p className="text-xs text-ink/70">{e.address}</p>
+            <motion.a whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }} href={e.map} target="_blank" rel="noreferrer" className="btn-wine mt-3 px-4 py-1.5 text-xs font-medium">
+              <MapPin className="h-3.5 w-3.5" /> Lihat Lokasi
+            </motion.a>
+          </>
+        )}
       </div>
     </motion.div>
   );
@@ -176,7 +178,7 @@ function Events() {
     <>
       <Title kicker="Rangkaian Acara">Waktu & Tempat</Title>
       <motion.div variants={stagger} className="mt-1 w-full space-y-3">
-        <EventCard icon={mosque.url} title="Akad Nikah" e={WEDDING.akad} tone="navy" />
+        <EventCard icon={mosque.url} title="Akad Nikah" e={WEDDING.akad} tone="navy" hideLocation />
         <EventCard icon={building.url} title="Resepsi" e={WEDDING.resepsi} tone="wine" />
       </motion.div>
     </>

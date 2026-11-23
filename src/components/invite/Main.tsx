@@ -132,7 +132,6 @@ function Hero({ guest }: { guest: string }) {
           {WEDDING.bride} <span className="text-[2.6rem] sm:text-6xl">&</span> {WEDDING.groom}
         </h1>
         <FiligreeDivider className="mx-auto mt-3 opacity-90" style={{ height: 22, width: 200 }} />
-        <p className="mt-3 font-caps text-sm tracking-[0.25em] text-ivory sm:text-base">18 & 20 DESEMBER 2026</p>
         <div className="mx-auto mt-7 max-w-[17rem] rounded-xl border border-royal-gold/50 bg-royal-wine-deep/55 px-6 py-3 backdrop-blur-sm">
           <p className="font-caps text-[10px] uppercase tracking-[0.3em] text-cream/75">Kepada Yth.</p>
           <p className="mt-1 truncate font-display text-xl font-semibold text-ivory">{guest}</p>
@@ -215,8 +214,10 @@ function Couple() {
       <GardenScene src={leavesImg.url} opacity={0.26} />
       <PetalRain count={6} seed={5} />
       <Twinkles count={8} seed={5} />
-      <Bloom kind="magenta" at="bl" className="w-32 sm:w-52" />
-      <Bloom kind="magenta" at="br" className="w-32 sm:w-52" delay={-3} />
+      <FloralCorner pos="tl" className="left-2 top-2 w-20 opacity-85 sm:left-4 sm:top-4 sm:w-28" />
+      <FloralCorner pos="tr" className="right-2 top-2 w-20 opacity-85 sm:right-4 sm:top-4 sm:w-28" delay={-3.5} />
+      <Bloom kind="plum" at="bl" className="w-36 sm:w-52" />
+      <Bloom kind="plum" at="br" className="w-36 sm:w-52" delay={-3} />
       <div className="relative mx-auto max-w-md px-4 py-16 text-center sm:max-w-3xl sm:py-24">
         <motion.div {...reveal}>
           <p className="font-caps text-[10px] uppercase tracking-[0.38em] text-royal-gold-light/75 sm:text-xs">Bismillahirrahmanirrahim</p>
@@ -266,21 +267,24 @@ function Countdown() {
 
 /* --------------------------------- events --------------------------------- */
 
-function EventCard({ icon, title, e, tone }: { icon: string; title: string; e: typeof WEDDING.akad; tone: "wine" | "navy" }) {
+function EventCard({ icon, title, e, tone, hideLocation = false }: { icon: string; title: string; e: typeof WEDDING.akad; tone: "wine" | "navy"; hideLocation?: boolean }) {
   return (
     <div className="relative">
       <span className="absolute -left-[27px] top-9 h-3.5 w-3.5 rounded-full border-2 border-royal-gold bg-royal-wine sm:-left-[35px]" aria-hidden />
       <div className={`${tone === "wine" ? "card-royal-wine" : "card-royal-navy"} px-5 py-6`}>
         <h3 className="font-caps text-lg font-semibold tracking-[0.18em] text-royal-gold-light">{title.toUpperCase()}</h3>
         <Hairline className="my-3 w-full max-w-[12rem] opacity-60" />
-        <p className="font-display text-lg font-semibold text-ivory">{e.label}</p>
-        <p className="text-sm text-cream/80">{e.time}</p>
+        <p className="font-display text-base font-medium text-cream/90">{e.time}</p>
         <img src={icon} alt="" className="floaty mx-auto my-4 h-20 object-contain" />
-        <p className="font-display text-xl font-semibold text-royal-gold">{e.place}</p>
-        <p className="mt-1 text-sm text-cream/80">{e.address}</p>
-        <a href={e.map} target="_blank" rel="noreferrer" className="btn-gold mt-5 px-6 py-2 text-sm">
-          <MapPin className="h-4 w-4" /> Lihat Lokasi
-        </a>
+        {!hideLocation && (
+          <>
+            <p className="font-display text-xl font-semibold text-royal-gold">{e.place}</p>
+            <p className="mt-1 text-sm text-cream/80">{e.address}</p>
+            <a href={e.map} target="_blank" rel="noreferrer" className="btn-gold mt-5 px-6 py-2 text-sm">
+              <MapPin className="h-4 w-4" /> Lihat Lokasi
+            </a>
+          </>
+        )}
       </div>
     </div>
   );
@@ -379,25 +383,72 @@ export function Main({ guest }: { guest: string }) {
       <Verse />
       <Couple />
 
-      <Band tone="wine" seed={6} scene={pathImg.url} sceneOpacity={0.22} decor={<Bloom kind="navy" at="tr" className="w-44 sm:w-64" />}>
+      <Band
+        tone="wine"
+        className="sm:max-w-4xl"
+        seed={8}
+        decor={
+          <>
+            <Bloom kind="magenta" at="tl" className="w-32 sm:w-48" />
+            <Bloom kind="magenta" at="tr" className="w-32 sm:w-48" delay={-4} />
+            <FloralCorner pos="bl" className="bottom-2 left-2 w-16 opacity-75 sm:bottom-4 sm:left-4 sm:w-24" />
+            <FloralCorner pos="br" className="bottom-2 right-2 w-16 opacity-75 sm:bottom-4 sm:right-4 sm:w-24" delay={-2} />
+          </>
+        }
+      >
+        <Heading kicker="Momen Bahagia">Galeri Kisah Kami</Heading>
+        <GalleryStories />
+      </Band>
+
+      <Band
+        tone="wine"
+        seed={6}
+        scene={pathImg.url}
+        sceneOpacity={0.22}
+        decor={
+          <>
+            <Bloom kind="navy" at="tl" className="w-32 sm:w-48" />
+            <Bloom kind="navy" at="br" className="w-32 sm:w-48" delay={-3.5} />
+            <FloralCorner pos="tr" className="right-2 top-2 w-16 opacity-75 sm:right-4 sm:top-4 sm:w-24" />
+            <FloralCorner pos="bl" className="bottom-2 left-2 w-16 opacity-75 sm:bottom-4 sm:left-4 sm:w-24" delay={-2} />
+          </>
+        }
+      >
         <Heading kicker="Save the Date">Menghitung Hari</Heading>
         <img src={calendar.url} alt="18 & 20" className="floaty mx-auto h-36 sm:h-40" />
+        <p className="mt-4 font-caps text-sm tracking-[0.25em] text-ivory sm:text-base">18 & 20 DESEMBER 2026</p>
         <Countdown />
       </Band>
 
-      <Band seed={7} butterflies={2} decor={<Bloom kind="burgundy" at="bl" className="w-44 sm:w-64" />}>
+      <Band
+        seed={7}
+        butterflies={2}
+        decor={
+          <>
+            <Bloom kind="burgundy" at="tr" className="w-32 sm:w-48" />
+            <Bloom kind="burgundy" at="bl" className="w-28 sm:w-44" delay={-3.5} />
+            <FloralCorner pos="tl" className="left-2 top-2 w-16 opacity-75 sm:left-4 sm:top-4 sm:w-24" />
+            <FloralCorner pos="br" className="bottom-2 right-2 w-16 opacity-75 sm:bottom-4 sm:right-4 sm:w-24" delay={-2} />
+          </>
+        }
+      >
         <Heading kicker="Rangkaian Acara">Jadwal Acara</Heading>
         <div className="relative ml-6 space-y-8 text-center sm:ml-8">
           <div className="absolute -left-[21px] bottom-10 top-10 w-px bg-royal-gold/45 sm:-left-[29px]" aria-hidden />
-          <EventCard icon={mosque.url} title="Akad Nikah" e={WEDDING.akad} tone="wine" />
+          <EventCard icon={mosque.url} title="Akad Nikah" e={WEDDING.akad} tone="wine" hideLocation />
           <EventCard icon={building.url} title="Resepsi" e={WEDDING.resepsi} tone="navy" />
         </div>
         <img src={pin.url} alt="" className="mx-auto mt-10 h-16 opacity-85" />
       </Band>
 
-      <Band tone="wine" className="sm:max-w-4xl" seed={8} decor={<><Bloom kind="plum" at="tr" className="w-32 sm:w-48" /><Bloom kind="plum" at="bl" className="w-32 sm:w-48" delay={-4} /></>}>
-        <Heading kicker="Momen Bahagia">Galeri Kisah Kami</Heading>
-        <GalleryStories />
+      <Band tone="wine" seed={10} butterflies={2} decor={<GoldFrame variant="arch" />} className="pt-24 sm:pt-32">
+        <Heading kicker="Konfirmasi Kehadiran">Kartu Ucapan & Doa</Heading>
+        <Rsvp guest={guest} />
+      </Band>
+
+      <Band tone="garden" scene={pathImg.url} sceneOpacity={0.32} seed={12} butterflies={2} className="sm:max-w-4xl" decor={<><Bloom kind="gold" at="tl" className="w-28 sm:w-44" /><Bloom kind="gold" at="tr" className="w-28 sm:w-44" delay={-3} /></>}>
+        <Heading kicker="Dari Hati Para Tamu">Untaian Ucapan & Doa</Heading>
+        <WishCarousel3D />
       </Band>
 
       <Band seed={9} scene={leavesImg.url} sceneOpacity={0.2} decor={<GoldFrame variant="double" />}>
@@ -425,24 +476,16 @@ export function Main({ guest }: { guest: string }) {
         </div>
       </Band>
 
-      <Band tone="wine" seed={10} butterflies={2} decor={<GoldFrame variant="arch" />} className="pt-24 sm:pt-32">
-        <Heading kicker="Konfirmasi Kehadiran">Kartu Ucapan & Doa</Heading>
-        <Rsvp guest={guest} />
-      </Band>
-
-      <Band tone="garden" scene={pathImg.url} sceneOpacity={0.32} seed={12} butterflies={2} className="sm:max-w-4xl" decor={<><Bloom kind="gold" at="tl" className="w-28 sm:w-44" /><Bloom kind="gold" at="tr" className="w-28 sm:w-44" delay={-3} /></>}>
-        <Heading kicker="Dari Hati Para Tamu">Untaian Ucapan & Doa</Heading>
-        <WishCarousel3D />
-      </Band>
-
       <section className="relative overflow-hidden bg-royal-navy px-6 pb-28 pt-16 text-center">
         <div className="absolute inset-x-0 top-0 h-[38%] rounded-b-[50%_3rem] border-b border-royal-gold/40 bg-royal-wine" />
         <GardenScene src={pathImg.url} opacity={0.3} />
         <PetalRain count={9} seed={11} />
         <Twinkles count={10} seed={11} />
         <ButterflyFlock count={3} />
-        <Bloom kind="magenta" at="bl" className="w-40 sm:w-60" />
-        <Bloom kind="burgundy" at="br" className="w-40 sm:w-60" delay={-4} />
+        <FloralCorner pos="tl" className="left-2 top-2 w-20 opacity-85 sm:left-4 sm:top-4 sm:w-28" />
+        <FloralCorner pos="tr" className="right-2 top-2 w-20 opacity-85 sm:right-4 sm:top-4 sm:w-28" delay={-3.5} />
+        <Bloom kind="burgundy" at="bl" className="w-36 sm:w-56" />
+        <Bloom kind="burgundy" at="br" className="w-36 sm:w-56" delay={-4} />
         <motion.div {...reveal} className="relative mx-auto max-w-md">
           <div className="mx-auto w-36 rounded-t-full border border-royal-gold/60 bg-royal-navy px-4 pb-5 pt-8 shadow-[0_16px_36px_-16px_oklch(0.1_0.03_260/0.9)]">
             <img src={emblem.url} alt="S&L" className="floaty mx-auto h-24" />
